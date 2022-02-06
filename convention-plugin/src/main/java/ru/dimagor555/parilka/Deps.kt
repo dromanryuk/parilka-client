@@ -25,4 +25,24 @@ object Deps {
         const val glide = "com.google.accompanist:accompanist-glide:0.10.0"
         const val flowLayout = "com.google.accompanist:accompanist-flowlayout:0.24.1-alpha"
     }
+
+    object KotlinX {
+        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.3.0"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    }
+
+    object Ktor {
+        private const val version = "1.6.7"
+        const val core = "io.ktor:ktor-client-core:$version"
+        const val json = "io.ktor:ktor-client-serialization:$version"
+        const val android = "io.ktor:ktor-client-android:$version"
+        const val ios = "io.ktor:ktor-client-ios:$version"
+    }
+
+    object Koin {
+        private const val version = "3.1.5"
+        const val core = "io.insert-koin:koin-core:$version"
+        const val android = "io.insert-koin:koin-android:$version"
+    }
 }

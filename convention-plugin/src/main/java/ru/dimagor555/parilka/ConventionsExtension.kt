@@ -8,7 +8,6 @@ open class ConventionsExtension {
 
     fun multiplatform() {
         project.multiplatformConvention()
-        project.androidMultiplatformConvention()
     }
 
     fun androidApp() {
@@ -21,6 +20,7 @@ open class ConventionsExtension {
     fun androidLib(isMultiplatform: Boolean = true) {
         project.androidCommonConvention()
         project.androidDependencies(isMultiplatform, androidCommonDependencies)
+        if (isMultiplatform) project.androidMultiplatformConvention()
     }
 
     fun compose(isMultiplatform: Boolean = true) {

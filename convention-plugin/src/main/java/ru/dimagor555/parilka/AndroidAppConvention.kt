@@ -34,6 +34,9 @@ internal fun Project.androidAppDependencies() {
     dependencies {
         implementation(Deps.AndroidX.splashScreen)
 
+        implementation(Deps.Koin.core)
+        implementation(Deps.Koin.android)
+
         coreLibraryDesugaring(Deps.jdkDesugar)
     }
 }

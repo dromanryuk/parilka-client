@@ -11,4 +11,5 @@ conventions {
 
 dependencies {
     implementation(projects.shared)
+    implementation(projects.bathFeature.data)
 }

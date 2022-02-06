@@ -14,3 +14,8 @@ includeBuild("convention-plugin")
 
 include(":androidApp")
 include(":shared")
+include(
+    "bath-feature",
+    ":bath-feature:usecase",
+    ":bath-feature:data"
+)
