@@ -33,8 +33,7 @@ fun OverviewScreenContent(
                 Text(
                     modifier = Modifier.padding(),
                     text = "Воспользуйтесь удобным фильтром для поиска",
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.subtitle2
                 )
                 Button(
                     onClick = { onFilterClick() },
@@ -46,14 +45,13 @@ fun OverviewScreenContent(
                 ) {
                     Text(
                         text = "Выбрать фильтры поиска",
-                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.body1
                     )
                 }
                 Text(
                     modifier = Modifier.padding(top = 5.dp),
                     text = "Все бани Киева:",
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.subtitle2
                 )
             }
         }

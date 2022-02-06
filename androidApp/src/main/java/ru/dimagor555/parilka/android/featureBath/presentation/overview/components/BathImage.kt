@@ -32,12 +32,12 @@ fun BathImage() {
             Text(
                 text = "Плакучая Ива",
                 color = MaterialTheme.colors.surface,
-                fontSize = 20.sp,
+                style = MaterialTheme.typography.subtitle1
             )
             Text(
                 text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
                 color = MaterialTheme.colors.surface,
-                fontSize = 10.sp,
+                style = MaterialTheme.typography.caption
             )
         }
     }

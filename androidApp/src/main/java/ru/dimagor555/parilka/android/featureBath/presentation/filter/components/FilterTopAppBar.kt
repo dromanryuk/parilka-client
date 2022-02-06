@@ -35,7 +35,7 @@ fun FilterTopAppBar(onBackClick: () -> Unit) {
             ) {
                 Text(
                     text = "Назад к поиску",
-                    fontSize = 10.sp,
+                    style = MaterialTheme.typography.button
                 )
             }
             Image(

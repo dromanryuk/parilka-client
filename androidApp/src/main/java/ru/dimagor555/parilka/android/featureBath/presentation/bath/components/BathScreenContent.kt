@@ -34,7 +34,6 @@ private fun BathName(name: String) {
     Text(
         modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 5.dp, top = 20.dp),
         text = name,
-        color = MaterialTheme.colors.onSurface,
-        fontSize = 22.sp,
+        style = MaterialTheme.typography.subtitle1
     )
 }

@@ -41,7 +41,7 @@ fun DetailsButton(text: String, fontColor: Color, backgroundColor: Color, modifi
     ) {
         Text(
             text = text,
-            fontSize = 14.sp,
+            style = MaterialTheme.typography.button
         )
     }
 }

@@ -39,7 +39,7 @@ fun BathTopAppBar(onBackClick: () -> Unit) {
             ) {
                 Text(
                     text = "Назад к поиску",
-                    fontSize = 10.sp,
+                    style = MaterialTheme.typography.button
                 )
             }
             Image(
@@ -57,7 +57,7 @@ fun BathTopAppBar(onBackClick: () -> Unit) {
                 ) {
                     Text(
                         text = "Настройки",
-                        fontSize = 10.sp,
+                        style = MaterialTheme.typography.button
                     )
                     Icon(
                         modifier = Modifier.size(20.dp),

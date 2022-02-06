@@ -75,7 +75,7 @@ val MontserratTypography = Typography(
     caption = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp
+        fontSize = 10.sp
     ),
     overline = TextStyle(
         fontFamily = Montserrat,
