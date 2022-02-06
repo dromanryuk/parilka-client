@@ -8,11 +8,12 @@ import ru.dimagor555.parilka.android.featureBath.presentation.overview.component
 
 @Composable
 fun OverviewScreen(
-    onBathClick: () -> Unit
+    onBathClick: () -> Unit,
+    onFilterClick: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier,
         topBar = { OverviewTopAppBar() },
-        content = { OverviewScreenContent(onBathClick) }
+        content = { OverviewScreenContent(onBathClick, onFilterClick) }
     )
 }

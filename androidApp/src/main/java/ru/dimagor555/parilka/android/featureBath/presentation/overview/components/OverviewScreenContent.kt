@@ -12,13 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun OverviewScreenContent(
-    onBathClick: () -> Unit
+    onBathClick: () -> Unit,
+    onFilterClick: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -37,7 +37,7 @@ fun OverviewScreenContent(
                     fontSize = 22.sp,
                 )
                 Button(
-                    onClick = { onBathClick() },
+                    onClick = { onFilterClick() },
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(0xFF2772e7),
