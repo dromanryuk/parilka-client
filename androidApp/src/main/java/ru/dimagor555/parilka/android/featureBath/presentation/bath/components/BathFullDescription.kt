@@ -30,13 +30,11 @@ fun BathFullDescription() {
                 Column() {
                     Text(
                         text = "Политехнический институт",
-                        color = MaterialTheme.colors.onSurface,
-                        fontSize = 18.sp,
+                        style = MaterialTheme.typography.body1
                     )
                     Text(
                         text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
-                        color = MaterialTheme.colors.onSurface,
-                        fontSize = 10.sp,
+                        style = MaterialTheme.typography.caption
                     )
                 }
             }
@@ -62,7 +60,7 @@ fun AnnotatedText(annotation: String, text: String) {
             append(AnnotatedString(annotation, spanStyle = SpanStyle(Color(0xFF004dff))))
             append(text)
         },
-        fontSize = 16.sp,
+        style = MaterialTheme.typography.body1
     )
 }
 
@@ -74,22 +72,20 @@ fun BathPrice(hourPrice: Int, dayPrice: Int, minHours: Int) {
         Text(
             text = "Цены:",
             color = Color(0xFF002ea3),
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.subtitle1
         )
         Text(
             text = "Час аренды - $hourPrice грн",
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 18.sp,
+            style = MaterialTheme.typography.subtitle2
         )
         Text(
             text = "Аренда на день - $dayPrice грн",
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 18.sp,
+            style = MaterialTheme.typography.subtitle2
         )
         Text(
             text = "Минимальное количество часов аренды: $minHours",
             color = MaterialTheme.colors.error.copy(0.5f),
-            fontSize = 10.sp,
+            style = MaterialTheme.typography.caption
         )
     }
 }
@@ -102,13 +98,12 @@ fun BathDescription() {
         Text(
             text = "Описание:",
             color = Color(0xFF002ea3),
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.subtitle1
         )
         Text(
             text = "Люди с плохой переносимостью высоких температур не всегда могут порадовать себя посещением классической «русской бани»." +
                     "Отличной альтернативой послужат Римская баня и Турецкий паровой хаммам за счет своего «щадящего» режима в процессе парения.",
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.body1
         )
     }
 }
@@ -121,12 +116,11 @@ fun LocationOnMap() {
         Text(
             text = "Расположение:",
             color = Color(0xFF002ea3),
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.subtitle1
         )
         Text(
             text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 10.sp,
+            style = MaterialTheme.typography.caption
         )
     }
 }
@@ -139,7 +133,7 @@ fun ReviewsOnGoogleMaps() {
         Text(
             text = "Отзывы на гугл картах:",
             color = Color(0xFF002ea3),
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.subtitle1
         )
     }
 }
@@ -152,7 +146,7 @@ fun BookBath() {
         Text(
             text = "Бронировать",
             color = Color(0xFF002ea3),
-            fontSize = 20.sp,
+            style = MaterialTheme.typography.subtitle1
         )
         DetailsButtons({})
     }

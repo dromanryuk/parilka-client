@@ -24,8 +24,7 @@ fun BathDescription(onBathClick: () -> Unit) {
             content = {
                 Text(
                     text = "Политехнический институт",
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.body1
                 )
             }
         )
@@ -62,7 +61,7 @@ fun OptionItem(text: String) {
             .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
         text = text,
         color = MaterialTheme.colors.surface,
-        fontSize = 14.sp,
+        style = MaterialTheme.typography.body2
     )
 }
 
@@ -70,7 +69,6 @@ fun OptionItem(text: String) {
 fun Description() {
     Text(
         text = "Русская  баня, финская баня, японская баня, офуро, чан на дровах",
-        color = MaterialTheme.colors.onSurface,
-        fontSize = 16.sp,
+        style = MaterialTheme.typography.body1
     )
 }

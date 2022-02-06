@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     fun NavGraph(navController: NavHostController) {
         AnimatedNavHost(
             navController = navController,
-            startDestination = Screen.Filter.route,
+            startDestination = Screen.Overview.route,
         ) {
             composable(
                 Screen.Overview.route,

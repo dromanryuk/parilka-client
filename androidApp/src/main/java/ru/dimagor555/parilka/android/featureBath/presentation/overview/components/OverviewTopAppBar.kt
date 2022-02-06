@@ -47,7 +47,7 @@ TopAppBar(
                 ) {
                     Text(
                         text = "Настройки",
-                        fontSize = 10.sp,
+                        style = MaterialTheme.typography.button
                     )
                     Icon(
                         modifier = Modifier.size(20.dp),

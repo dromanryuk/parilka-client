@@ -20,13 +20,12 @@ fun CostQuantityStatus() {
     ) {
         Text(
             text = "От 9999 грн/час",
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 22.sp,
+            style = MaterialTheme.typography.subtitle1
         )
         Text(
             text = "До 12 чел.",
             color = MaterialTheme.colors.onSurface.copy(0.5f),
-            fontSize = 18.sp,
+            style = MaterialTheme.typography.body1
         )
     }
 }
