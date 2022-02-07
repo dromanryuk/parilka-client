@@ -3,6 +3,8 @@ package ru.dimagor555.parilka
 object Deps {
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.1.5"
 
+    const val multiSettings = "com.russhwolf:multiplatform-settings-no-arg:0.8.1"
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.7.0"
         const val appCompat = "androidx.appcompat:appcompat:1.4.1"

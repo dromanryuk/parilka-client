@@ -21,6 +21,8 @@ kotlin {
         implementation(Deps.Ktor.core)
         implementation(Deps.Ktor.json)
         implementation(Deps.Koin.core)
+
+        implementation(Deps.multiSettings)
     }
 
     androidDependencies {
