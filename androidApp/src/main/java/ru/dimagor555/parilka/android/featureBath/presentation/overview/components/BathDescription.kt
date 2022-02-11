@@ -8,45 +8,54 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import ru.dimagor555.parilka.android.featureBath.presentation.components.BathLocation
 import ru.dimagor555.parilka.android.featureBath.presentation.components.CostQuantityStatus
 import ru.dimagor555.parilka.android.featureBath.presentation.components.DetailsButtons
+import ru.dimagor555.parilka.bath.domain.bathoffer.Bath
 
 @Composable
-fun BathDescription(onBathClick: () -> Unit) {
+fun BathDescription(
+    onBathClick: () -> Unit,
+    price: UInt,
+    capacity: UByte,
+    subwayStation: String?,
+    servicesByTypes: Map<Bath.ServiceType, Set<String>>,
+    bathTypes: Set<String>,
+    phoneNumber: String
+) {
     Column(
         modifier = Modifier.padding(8.dp),
     ) {
-        CostQuantityStatus()
-        BathLocation(
-            content = {
-                Text(
-                    text = "Политехнический институт",
-                    style = MaterialTheme.typography.body1
-                )
-            }
-        )
-        Options()
-        Description()
-        DetailsButtons(onBathClick)
+        CostQuantityStatus(price, capacity)
+        if (!subwayStation.isNullOrEmpty()) {
+            BathLocation(
+                content = {
+                    Text(
+                        text = subwayStation,
+                        style = MaterialTheme.typography.body1
+                    )
+                }
+            )
+        }
+        Options(servicesByTypes)
+        Description(bathTypes)
+        DetailsButtons(onBathClick, phoneNumber)
     }
 }
 
 @Composable
-fun Options() {
+fun Options(servicesByTypes: Map<Bath.ServiceType, Set<String>>) {
     FlowRow(
         modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
         mainAxisSpacing = 5.dp,
         crossAxisSpacing = 5.dp
     ) {
-        OptionItem("Бассейн")
-        OptionItem("Чан")
-        OptionItem("Фитскомната")
-        OptionItem("Мангал")
-        OptionItem("Массаж")
-        OptionItem("Парение для детей")
+        servicesByTypes.forEach {
+            it.value.forEach { service ->
+                OptionItem(service)
+            }
+        }
     }
 }
 
@@ -66,9 +75,9 @@ fun OptionItem(text: String) {
 }
 
 @Composable
-fun Description() {
+fun Description(bathTypes: Set<String>) {
     Text(
-        text = "Русская  баня, финская баня, японская баня, офуро, чан на дровах",
+        text = bathTypes.toString().drop(1).dropLast(1),
         style = MaterialTheme.typography.body1
     )
 }

@@ -7,9 +7,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ru.dimagor555.parilka.android.featureBath.presentation.overview.model.state.BathOfferState
 
 @Composable
 fun BathCard(
+    state: BathOfferState,
     modifier: Modifier,
     onBathClick: () -> Unit
 ) {
@@ -22,8 +24,20 @@ fun BathCard(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            BathImage()
-            BathDescription(onBathClick)
+            BathImage(
+                img = state.imageUrls,
+                name = state.name,
+                address = state.bath.location.address,
+                district = state.bath.location.district)
+            BathDescription(
+                onBathClick,
+                price = state.price,
+                capacity = state.bath.capacity,
+                subwayStation = state.bath.location.subwayStation,
+                servicesByTypes = state.bath.servicesByTypes,
+                bathTypes = state.bath.bathTypes,
+                phoneNumber = state.phoneNumber
+            )
         }
     }
 }

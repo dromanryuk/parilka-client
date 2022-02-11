@@ -11,6 +11,7 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import ru.dimagor555.parilka.android.featureBath.coin.bathPresentationModule
 import ru.dimagor555.parilka.android.featureBath.presentation.bath.BathScreen
 import ru.dimagor555.parilka.android.featureBath.presentation.filter.FilterScreen
 import ru.dimagor555.parilka.android.featureBath.presentation.overview.OverviewScreen
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         startKoin {
             androidContext(this@MainActivity)
-            modules(bathDataModule)
+            modules(bathDataModule, bathPresentationModule)
         }
         setContent {
             ParilkaTheme {
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 Screen.Bath.route,
             ) {
                 BathScreen(
+                    bathId = 1,
                     onBackClick = { navController.navigate(Screen.Overview.route) }
                 )
             }

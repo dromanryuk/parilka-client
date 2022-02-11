@@ -12,10 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import ru.dimagor555.parilka.android.featureBath.presentation.bath.model.state.BathContentState
 
 @Composable
-fun BathScreenContent() {
+fun BathScreenContent(bathState: BathContentState) {
     val state = rememberScrollState()
     Column(
         modifier = Modifier
@@ -23,9 +23,22 @@ fun BathScreenContent() {
             .verticalScroll(state)
             .background(Color(0xFFe6ecf5)),
     ) {
-        BathName("Плакучая Ива - Русская баня")
-        BathImages()
-        BathFullDescription()
+        BathName(bathState.name)
+        BathImages(bathState.imageUrls)
+
+        BathFullDescription(
+            bathState.bathRentTerms.minPrice,
+            bathState.bath.capacity,
+            bathState.phoneNumber,
+            bathState.bath.location.district,
+            bathState.bath.location.address,
+            bathState.bath.location.subwayStation,
+            bathState.bath.bathTypes,
+            bathState.bath.servicesByTypes,
+            bathState.bathRentTerms.minRentHours,
+            bathState.bathRentTerms.priceNames,
+            bathState.description
+        )
     }
 }
 

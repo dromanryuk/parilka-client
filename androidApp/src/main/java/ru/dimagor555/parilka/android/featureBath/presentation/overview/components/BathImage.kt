@@ -11,32 +11,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.google.accompanist.glide.rememberGlidePainter
 
 @Composable
-fun BathImage() {
+fun BathImage(
+    img: Set<String>,
+    name: String,
+    address: String,
+    district: String?
+) {
     Box(
         modifier = Modifier.clip(RoundedCornerShape(5.dp)),
         contentAlignment = Alignment.BottomStart
     ) {
         Image(
-            painter = rememberGlidePainter("https://baniaisauna.ru/wp-content/uploads/YF3UeP2D90OX3nj5FqXDqoKFTzAZx4xD9pustwkY.jpeg"),
-            contentDescription = "bath"
+            painter = rememberGlidePainter(img.first()),
+            contentDescription = "bathImg"
         )
         Column(
             modifier = Modifier.padding(10.dp)
         ) {
             Text(
-                text = "Плакучая Ива",
-                color = MaterialTheme.colors.surface,
+                text = name,
+                color = if (img.isEmpty()) MaterialTheme.colors.onSurface else MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.subtitle1
             )
             Text(
-                text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
-                color = MaterialTheme.colors.surface,
+                text = "$district $address",
+                color = if (img.isEmpty()) MaterialTheme.colors.onSurface else MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.caption
             )
         }

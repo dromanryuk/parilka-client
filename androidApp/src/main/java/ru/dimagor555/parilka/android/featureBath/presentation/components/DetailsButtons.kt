@@ -14,16 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
-fun DetailsButtons(onBathClick: () -> Unit) {
+fun DetailsButtons(onBathClick: () -> Unit, phoneNumber: String) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        DetailsButton("+380678877888", MaterialTheme.colors.onSurface, Color(0xFFdedffd), Modifier.weight(1f), {})
+        DetailsButton(phoneNumber, MaterialTheme.colors.onSurface, Color(0xFFdedffd), Modifier.weight(1f), {})
         DetailsButton("Подробнее", MaterialTheme.colors.surface, Color(0xFF004dff), Modifier.weight(1f), onBathClick)
     }
 }

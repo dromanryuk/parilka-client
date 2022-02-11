@@ -13,29 +13,31 @@ import com.google.accompanist.glide.rememberGlidePainter
 import ru.dimagor555.parilka.android.featureBath.presentation.components.DefaultIconButton
 
 @Composable
-fun BathImages() {
+fun BathImages(imageUrls: Set<String>) {
     Box(
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = rememberGlidePainter("https://baniaisauna.ru/wp-content/uploads/YF3UeP2D90OX3nj5FqXDqoKFTzAZx4xD9pustwkY.jpeg"),
-            contentDescription = "bath"
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            DefaultIconButton(
-                image = Icons.Filled.KeyboardArrowLeft,
-                color = MaterialTheme.colors.surface.copy(0.7f),
-                onClick = {}
+        if (imageUrls.isNotEmpty()) {
+            Image(
+                painter = rememberGlidePainter(imageUrls.first()),
+                contentDescription = "bath"
             )
-            DefaultIconButton(
-                image = Icons.Filled.KeyboardArrowRight,
-                color = MaterialTheme.colors.surface.copy(0.7f),
-                onClick = {}
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                DefaultIconButton(
+                    image = Icons.Filled.KeyboardArrowLeft,
+                    color = MaterialTheme.colors.surface.copy(0.7f),
+                    onClick = {}
+                )
+                DefaultIconButton(
+                    image = Icons.Filled.KeyboardArrowRight,
+                    color = MaterialTheme.colors.surface.copy(0.7f),
+                    onClick = {}
+                )
+            }
         }
     }
 }

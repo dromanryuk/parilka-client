@@ -11,44 +11,66 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import ru.dimagor555.parilka.android.featureBath.presentation.components.BathLocation
 import ru.dimagor555.parilka.android.featureBath.presentation.components.CostQuantityStatus
 import ru.dimagor555.parilka.android.featureBath.presentation.components.DetailsButtons
+import ru.dimagor555.parilka.bath.domain.bathoffer.Bath
 
 @Composable
-fun BathFullDescription() {
+fun BathFullDescription(
+    minPrice: UInt,
+    capacity: UByte,
+    phoneNumber: String,
+    distinct: String?,
+    address: String,
+    subwayStation: String?,
+    bathTypes: Set<String>,
+    servicesByTypes: Map<Bath.ServiceType, Set<String>>,
+    minRentHours: UByte,
+    priceNames: Set<String>,
+    description: String?,
+) {
     Column(
         modifier = Modifier
             .padding(10.dp)
             .background(Color(0xFFe6ecf5)),
     ) {
-        CostQuantityStatus()
-        DetailsButtons({})
+        CostQuantityStatus(minPrice, capacity)
+        DetailsButtons({}, phoneNumber)
         BathLocation(
             content = {
                 Column() {
+                    subwayStation?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.body1
+                        )
+                    }
                     Text(
-                        text = "Политехнический институт",
-                        style = MaterialTheme.typography.body1
-                    )
-                    Text(
-                        text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
+                        text = "$distinct $address",
                         style = MaterialTheme.typography.caption
                     )
                 }
             }
         )
-        AnnotatedText("Виды парной: ", "Руская баня, Хаммам, Финская баня, Нифракрасная баня")
-        AnnotatedText("Банные услуги: ", "Проф. парение, детское парение, фиточан")
-        AnnotatedText("Аквазона: ", "Бассейн, Купель")
-        AnnotatedText("Доп. Услуги: ", "Телевизор, кальян, массаж, кондиционер, караоке, Wi-Fi, бильярд, банкетный зал")
-        AnnotatedText("Кухня: ", "Мангал, Бар-ресторан, разливное пиво, свежие морепродукты")
-        BathPrice(200, 1000, 2)
-        BathDescription()
-        LocationOnMap()
+        AnnotatedText("Виды парной: ", bathTypes.toString().drop(1).dropLast(1))
+        servicesByTypes.forEach {
+            when (it.key) {
+                Bath.ServiceType.BATH -> AnnotatedText("Банные услуги: ",
+                    it.value.toString().drop(1).dropLast(1))
+                Bath.ServiceType.AQUA -> AnnotatedText("Аквазона: ",
+                    it.value.toString().drop(1).dropLast(1))
+                Bath.ServiceType.ADDITIONAL -> AnnotatedText("Доп. Услуги: ",
+                    it.value.toString().drop(1).dropLast(1))
+                Bath.ServiceType.FOOD -> AnnotatedText("Кухня: ",
+                    it.value.toString().drop(1).dropLast(1))
+            }
+        }
+        BathPrice(priceNames, minRentHours.toInt())
+        BathDescription(description)
+        LocationOnMap(distinct, address)
         ReviewsOnGoogleMaps()
-        BookBath()
+        BookBath(phoneNumber)
     }
 }
 
@@ -65,7 +87,7 @@ fun AnnotatedText(annotation: String, text: String) {
 }
 
 @Composable
-fun BathPrice(hourPrice: Int, dayPrice: Int, minHours: Int) {
+fun BathPrice(priceNames: Set<String>, minHours: Int) {
     Column(
         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
     ) {
@@ -74,14 +96,12 @@ fun BathPrice(hourPrice: Int, dayPrice: Int, minHours: Int) {
             color = Color(0xFF002ea3),
             style = MaterialTheme.typography.subtitle1
         )
-        Text(
-            text = "Час аренды - $hourPrice грн",
-            style = MaterialTheme.typography.subtitle2
-        )
-        Text(
-            text = "Аренда на день - $dayPrice грн",
-            style = MaterialTheme.typography.subtitle2
-        )
+        priceNames.forEach {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.subtitle2
+            )
+        }
         Text(
             text = "Минимальное количество часов аренды: $minHours",
             color = MaterialTheme.colors.error.copy(0.5f),
@@ -91,7 +111,7 @@ fun BathPrice(hourPrice: Int, dayPrice: Int, minHours: Int) {
 }
 
 @Composable
-fun BathDescription() {
+fun BathDescription(description: String?) {
     Column(
         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
     ) {
@@ -100,16 +120,17 @@ fun BathDescription() {
             color = Color(0xFF002ea3),
             style = MaterialTheme.typography.subtitle1
         )
-        Text(
-            text = "Люди с плохой переносимостью высоких температур не всегда могут порадовать себя посещением классической «русской бани»." +
-                    "Отличной альтернативой послужат Римская баня и Турецкий паровой хаммам за счет своего «щадящего» режима в процессе парения.",
-            style = MaterialTheme.typography.body1
-        )
+        description?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.body1
+            )
+        }
     }
 }
 
 @Composable
-fun LocationOnMap() {
+fun LocationOnMap(distinct: String?, address: String) {
     Column(
         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
     ) {
@@ -119,7 +140,7 @@ fun LocationOnMap() {
             style = MaterialTheme.typography.subtitle1
         )
         Text(
-            text = "обл: Киевская, пос. Козин. ул. Лбуховское шоссе, 55",
+            text = "$distinct $address",
             style = MaterialTheme.typography.caption
         )
     }
@@ -139,7 +160,7 @@ fun ReviewsOnGoogleMaps() {
 }
 
 @Composable
-fun BookBath() {
+fun BookBath(phoneNumber: String) {
     Column(
         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
     ) {
@@ -148,6 +169,6 @@ fun BookBath() {
             color = Color(0xFF002ea3),
             style = MaterialTheme.typography.subtitle1
         )
-        DetailsButtons({})
+        DetailsButtons({}, phoneNumber)
     }
 }
