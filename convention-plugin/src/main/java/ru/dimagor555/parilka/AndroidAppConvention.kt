@@ -36,6 +36,7 @@ internal fun Project.androidAppDependencies() {
 
         implementation(Deps.Koin.core)
         implementation(Deps.Koin.android)
+        implementation(Deps.Koin.compose)
 
         coreLibraryDesugaring(Deps.jdkDesugar)
     }

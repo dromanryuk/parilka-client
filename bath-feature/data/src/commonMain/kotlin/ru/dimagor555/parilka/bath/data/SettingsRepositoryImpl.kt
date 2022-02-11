@@ -7,7 +7,7 @@ import ru.dimagor555.parilka.bath.repository.SettingsRepository
 internal class SettingsRepositoryImpl: SettingsRepository {
     private val citySettings: Settings = Settings()
 
-    override suspend fun getValue(key: String): Any? =
+    override fun getValue(key: String): Int? =
         citySettings[key]
 
     override suspend fun setSavedCity(cityId: Int) {
