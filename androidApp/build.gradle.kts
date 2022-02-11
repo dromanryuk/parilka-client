@@ -12,4 +12,8 @@ conventions {
 dependencies {
     implementation(projects.shared)
     implementation(projects.bathFeature.data)
+    implementation(projects.parilkaClient.bathFeature.usecase)
+
+    implementation(ru.dimagor555.parilka.Deps.MviCompose.core)
+    implementation(ru.dimagor555.parilka.Deps.MviCompose.android)
 }

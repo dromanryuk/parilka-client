@@ -8,8 +8,13 @@ object Deps {
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.7.0"
         const val appCompat = "androidx.appcompat:appcompat:1.4.1"
-
         const val splashScreen = "androidx.core:core-splashscreen:1.0.0-alpha01"
+    }
+
+    object MviCompose {
+        private const val version = "1.0.0"
+        const val core = "io.github.dimagor555.mvicompose:core:$version"
+        const val android = "io.github.dimagor555.mvicompose:android:$version"
     }
 
     object Compose {
