@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun FilterScreenContent(
+    state: Map<String, Set<String>>,
     onClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -22,10 +23,8 @@ fun FilterScreenContent(
             .padding(bottom = 70.dp)
             .fillMaxSize(),
     ) {
-        FilterCard("Виды парной", "Руская баня, Хаммам, Финская баня, Нифракрасная баня", Icons.Default.Home, {})
-        FilterCard("Банные услуги", "Проф. парение, детское парение, фиточан", Icons.Default.Home, {})
-        FilterCard("Аквазона", "Бассейн, Купель", Icons.Default.Home, {})
-        FilterCard("Доп. Услуги", "Телевизор, кальян, массаж, кондиционер, караоке, Wi-Fi, бильярд, банкетный зал", Icons.Default.Home, {})
-        FilterCard("Кухня", "Мангал, Бар-ресторан, разливное пиво, свежие морепродукты", Icons.Default.Home, {})
+        state.forEach { (title, filters) ->
+            FilterCard(title, filters.toString().drop(1).dropLast(1), Icons.Default.Home, {})
+        }
     }
 }
