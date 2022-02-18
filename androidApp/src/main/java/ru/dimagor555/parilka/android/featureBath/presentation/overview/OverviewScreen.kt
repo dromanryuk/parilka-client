@@ -12,14 +12,21 @@ import ru.dimagor555.parilka.android.featureBath.presentation.overview.component
 @Composable
 fun OverviewScreen(
     onBathClick: () -> Unit,
-    onFilterClick: () -> Unit
+    onFilterClick: () -> Unit,
+    onCityClick: () -> Unit,
 ) {
     val viewModel by viewModel<BathOverviewViewModel>()
     val state by viewModel.state.collectAsState()
 
     Scaffold(
         modifier = Modifier,
-        topBar = { OverviewTopAppBar() },
+        topBar = {
+            OverviewTopAppBar(
+                cityName = state.cityName,
+                onCitySelectClick = onCityClick,
+                onSettingsClick = {}
+            )
+        },
         content = { OverviewScreenContent(state.bathStates, onBathClick, onFilterClick) }
     )
 }
