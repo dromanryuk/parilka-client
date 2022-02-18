@@ -3,28 +3,35 @@ package ru.dimagor555.parilka.bath.usecase
 import ru.dimagor555.parilka.bath.domain.bathoffer.Bath
 import ru.dimagor555.parilka.bath.usecase.GetFiltersUseCase.FilterType.*
 
+private typealias Filters = MutableSet<String>
+
 class GetFiltersUseCase(
     private val getBathOffers: GetBathOffersForUserCityUseCase
 ) {
     suspend operator fun invoke() = getAllFilters()
 
     private suspend fun getAllFilters(): Map<FilterType, Set<String>> {
-        val baths = getBathOffers()
-        val filters = mutableMapOf<FilterType, Set<String>>()
-
-        baths.forEach { bath ->
-            filters[BATH_TYPE] = bath.content.bath.bathTypes
-            bath.content.bath.servicesByTypes.forEach {
-                when (it.key) {
-                    Bath.ServiceType.BATH -> filters[BATH_SERVICE] = it.value
-                    Bath.ServiceType.AQUA -> filters[AQUA_SERVICE] = it.value
-                    Bath.ServiceType.ADDITIONAL -> filters[ADDITIONAL_SERVICE] = it.value
-                    Bath.ServiceType.FOOD -> filters[FOOD_SERVICE] = it.value
-                }
+        val filters = createMutableFilters()
+        getBathOffers().forEach { bath ->
+            filters[BATH_TYPE]!! += bath.content.bath.bathTypes
+            bath.content.bath.servicesByTypes.forEach { (serviceType, services) ->
+                filters[serviceType.toFilterType()]!! += services
             }
         }
-
         return filters
+    }
+
+    private fun createMutableFilters(): Map<FilterType, Filters> = buildMap {
+        enumValues<FilterType>().forEach { filterType ->
+            this[filterType] = mutableSetOf()
+        }
+    }
+
+    private fun Bath.ServiceType.toFilterType() = when (this) {
+        Bath.ServiceType.BATH -> BATH_SERVICE
+        Bath.ServiceType.AQUA -> AQUA_SERVICE
+        Bath.ServiceType.ADDITIONAL -> ADDITIONAL_SERVICE
+        Bath.ServiceType.FOOD -> FOOD_SERVICE
     }
 
     enum class FilterType {
