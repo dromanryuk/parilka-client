@@ -1,26 +1,25 @@
 package ru.dimagor555.parilka.bath.usecase
 
 import ru.dimagor555.parilka.bath.domain.bathoffer.Bath
-import ru.dimagor555.parilka.bath.repository.BathOfferRepository
 import ru.dimagor555.parilka.bath.usecase.GetFiltersUseCase.FilterType.*
 
 class GetFiltersUseCase(
-    private val bathOfferRepository: BathOfferRepository
+    private val getBathOffers: GetBathOffersForUserCityUseCase
 ) {
-    suspend operator fun invoke(cityId: Int) = getAllFilters(cityId)
+    suspend operator fun invoke() = getAllFilters()
 
-    private suspend fun getAllFilters(cityId: Int): Map<FilterType, Set<String>> {
-        val baths = bathOfferRepository.getByCityId(cityId)
+    private suspend fun getAllFilters(): Map<FilterType, Set<String>> {
+        val baths = getBathOffers()
         val filters = mutableMapOf<FilterType, Set<String>>()
 
         baths.forEach { bath ->
-            filters[STEAM] = bath.content.bath.bathTypes
+            filters[BATH_TYPE] = bath.content.bath.bathTypes
             bath.content.bath.servicesByTypes.forEach {
                 when (it.key) {
-                    Bath.ServiceType.BATH -> filters[BATH] = it.value
-                    Bath.ServiceType.AQUA -> filters[AQUA] = it.value
-                    Bath.ServiceType.ADDITIONAL -> filters[ADDITIONAL] = it.value
-                    Bath.ServiceType.FOOD -> filters[FOOD] = it.value
+                    Bath.ServiceType.BATH -> filters[BATH_SERVICE] = it.value
+                    Bath.ServiceType.AQUA -> filters[AQUA_SERVICE] = it.value
+                    Bath.ServiceType.ADDITIONAL -> filters[ADDITIONAL_SERVICE] = it.value
+                    Bath.ServiceType.FOOD -> filters[FOOD_SERVICE] = it.value
                 }
             }
         }
@@ -29,6 +28,6 @@ class GetFiltersUseCase(
     }
 
     enum class FilterType {
-        STEAM, BATH, AQUA, ADDITIONAL, FOOD
+        BATH_TYPE, BATH_SERVICE, AQUA_SERVICE, ADDITIONAL_SERVICE, FOOD_SERVICE
     }
 }

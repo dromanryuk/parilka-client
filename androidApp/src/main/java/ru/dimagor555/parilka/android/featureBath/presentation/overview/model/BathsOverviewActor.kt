@@ -10,15 +10,22 @@ class BathsOverviewActor(
 ) : Actor<State, Action, Message, SideEffect>() {
     override suspend fun onAction(action: Action) {
         when (action) {
-            Action.InitScreen -> getBaths()
+            Action.InitScreen -> initScreen()
         }
     }
 
-    private suspend fun getBaths() {
-        val cityId = useCases.getCityId("cityId") ?: return
-        val city = useCases.getCityById(cityId) ?: return
-        sendMessage(Message.SetNearestCity(cityId, city.name))
-        val bathState = useCases.getBaths(cityId).map { it.toBathOfferState() }
+    private suspend fun initScreen() {
+        loadUserCity()
+        loadBathOffers()
+    }
+
+    private suspend fun loadUserCity() {
+        val userCity = useCases.getUserCity()
+        sendMessage(Message.SetUserCityName(userCity.name))
+    }
+
+    private suspend fun loadBathOffers() {
+        val bathState = useCases.getBathOffers().map { it.toBathOfferState() }
         sendMessage(Message.ShowBathStates(bathState))
     }
 }

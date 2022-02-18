@@ -8,6 +8,6 @@ class BathsOverviewReducer : Reducer<State, Message> {
     override fun State.reduce(msg: Message): State =
         when (msg) {
             is Message.ShowBathStates -> copy(bathStates = msg.bathStates)
-            is Message.SetNearestCity -> copy(cityId = msg.cityId, cityName = msg.cityName)
+            is Message.SetUserCityName -> copy(cityName = msg.cityName)
         }
 }

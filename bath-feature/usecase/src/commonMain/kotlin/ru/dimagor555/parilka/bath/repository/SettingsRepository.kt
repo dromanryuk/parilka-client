@@ -1,7 +1,18 @@
 package ru.dimagor555.parilka.bath.repository
 
-interface SettingsRepository {
-    fun getValue(key: String): Int?
+import kotlin.reflect.KClass
 
-    suspend fun setSavedCity(cityId: Int)
+interface SettingsRepository {
+    suspend fun <T : Any> get(property: Property<T>): T?
+
+    suspend fun <T : Any> set(property: Property<T>, value: T?)
+
+    data class Property<T : Any>(
+        val key: String,
+        val kClass: KClass<T>
+    )
+
+    companion object Properties {
+        val USER_CITY_ID = Property(key = "userCityId", kClass = Int::class)
+    }
 }

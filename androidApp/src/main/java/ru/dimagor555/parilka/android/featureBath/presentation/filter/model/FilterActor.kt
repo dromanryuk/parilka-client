@@ -16,19 +16,18 @@ class FilterActor(
     }
 
     private suspend fun getFilters() {
-        val cityId = useCases.getSettingsByKeyUseCase("cityId") ?: return
-        val filters = useCases.getFiltersUseCase(cityId)
+        val filters = useCases.getFiltersUseCase()
         val filterNames = filters.mapKeys { getFilterName(it.key) }
         sendMessage(Message.ShowFilters(filterNames))
     }
 
     private fun getFilterName(key: GetFiltersUseCase.FilterType): String {
         return when (key) {
-            GetFiltersUseCase.FilterType.STEAM -> "Виды парной"
-            GetFiltersUseCase.FilterType.BATH -> "Банные услуги"
-            GetFiltersUseCase.FilterType.AQUA -> "Аквазона"
-            GetFiltersUseCase.FilterType.ADDITIONAL -> "Доп. Услуги"
-            GetFiltersUseCase.FilterType.FOOD -> "Кухня"
+            GetFiltersUseCase.FilterType.BATH_TYPE -> "Виды парной"
+            GetFiltersUseCase.FilterType.BATH_SERVICE -> "Банные услуги"
+            GetFiltersUseCase.FilterType.AQUA_SERVICE -> "Аквазона"
+            GetFiltersUseCase.FilterType.ADDITIONAL_SERVICE -> "Доп. услуги"
+            GetFiltersUseCase.FilterType.FOOD_SERVICE -> "Кухня"
         }
     }
 }

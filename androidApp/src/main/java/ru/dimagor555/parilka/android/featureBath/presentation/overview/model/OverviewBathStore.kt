@@ -17,17 +17,16 @@ class OverviewBathStore(
 ) {
     data class State(
         val bathStates: List<BathOfferState> = emptyList(),
-        val cityId: Int = 0,
         val cityName: String = ""
     )
 
     sealed interface Action {
-         object InitScreen : Action
+        object InitScreen : Action
     }
 
     sealed interface Message {
         data class ShowBathStates(val bathStates: List<BathOfferState>) : Message
-        data class SetNearestCity(val cityId: Int, val cityName: String) : Message
+        data class SetUserCityName(val cityName: String) : Message
     }
 
     sealed interface SideEffect {
