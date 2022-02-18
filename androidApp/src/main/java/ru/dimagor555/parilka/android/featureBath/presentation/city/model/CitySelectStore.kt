@@ -18,6 +18,7 @@ class CitySelectStore(useCases: CitySelectUseCases) : Store<Action, State, SideE
 
     sealed interface Action {
         object InitScreen : Action
+        data class SaveCityIdInSettings(val cityId: Int) : Action
     }
 
     sealed interface Message {

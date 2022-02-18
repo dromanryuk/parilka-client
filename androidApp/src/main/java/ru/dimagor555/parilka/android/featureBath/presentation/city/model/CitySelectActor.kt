@@ -11,11 +11,16 @@ class CitySelectActor(
     override suspend fun onAction(action: Action) {
         when (action) {
             is InitScreen -> getCities()
+            is SaveCityIdInSettings -> saveCityIdInSettings(action.cityId)
         }
     }
 
     private suspend fun getCities() {
         val citiesState = useCases.getAllCitiesUseCase().map { it.toCityState() }
         sendMessage(Message.ShowBathStates(citiesState))
+    }
+
+    private suspend fun saveCityIdInSettings(cityId: Int) {
+        useCases.setCitySettingsUseCase(cityId)
     }
 }

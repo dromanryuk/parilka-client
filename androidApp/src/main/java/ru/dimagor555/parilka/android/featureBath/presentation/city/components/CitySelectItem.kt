@@ -25,12 +25,12 @@ fun CitySelectItem(
             .clickable { onCityClick(state.id) }
     ) {
         Text(
-            modifier = Modifier.padding(5.dp),
+            modifier = Modifier.padding(start = 10.dp, end = 5.dp, top = 10.dp),
             text = state.name,
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.h2
         )
         Text(
-            modifier = Modifier.padding(5.dp),
+            modifier = Modifier.padding(start = 10.dp, end = 5.dp, bottom = 10.dp),
             text = state.country,
             style = MaterialTheme.typography.caption
         )
