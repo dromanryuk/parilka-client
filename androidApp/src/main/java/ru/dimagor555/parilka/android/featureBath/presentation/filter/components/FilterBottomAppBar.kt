@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FilterBottomAppBar(onBackClick: () -> Unit) {
+fun FilterBottomAppBar(onSaveClick: () -> Unit) {
     BottomAppBar(
         modifier = Modifier
-                .clickable { onBackClick() },
+                .clickable { onSaveClick() },
         backgroundColor = MaterialTheme.colors.secondaryVariant,
         elevation = 0.dp
     ) {

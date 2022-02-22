@@ -13,8 +13,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun FilterScreenContent(
-    state: Map<String, Set<String>>,
-    onClick: () -> Unit
+    allFilters: Map<String, Set<String>>,
+    markedFilters: Set<String>,
+    onClick: (String, Boolean) -> Unit
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -23,8 +24,8 @@ fun FilterScreenContent(
             .padding(bottom = 70.dp)
             .fillMaxSize(),
     ) {
-        state.forEach { (title, filters) ->
-            FilterCard(title, filters.toString().drop(1).dropLast(1), Icons.Default.Home, {})
+        allFilters.forEach { (title, filters) ->
+            FilterCard(title, filters, markedFilters, Icons.Default.Home, onClick)
         }
     }
 }

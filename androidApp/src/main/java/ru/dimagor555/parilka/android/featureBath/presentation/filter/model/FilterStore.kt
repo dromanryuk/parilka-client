@@ -10,18 +10,22 @@ class FilterStore(useCases: FilterUseCases) : Store<Action, State, SideEffect> b
     initialState = State(),
     actor = FilterActor(useCases),
     reducer = FilterReducer(),
-    bootstrapper = SimpleActionBootstrapper()
+    bootstrapper = SimpleActionBootstrapper(Action.InitScreen)
 ) {
     data class State(
         val filtersState: Map<String, Set<String>> = emptyMap(),
+        val markedFilters: Set<String> = emptySet()
     )
 
     sealed interface Action {
         object InitScreen : Action
+        data class MarkFilter(val filter: String, val isMarked: Boolean) : Action
+        data class SaveMarkedFilters(val markedFilters: Set<String>) : Action
     }
 
     sealed interface Message {
         data class ShowFilters(val filters: Map<String, Set<String>>) : Message
+        data class MarkFilter(val filter: String, val isMarked: Boolean) : Message
     }
 
     sealed interface SideEffect {

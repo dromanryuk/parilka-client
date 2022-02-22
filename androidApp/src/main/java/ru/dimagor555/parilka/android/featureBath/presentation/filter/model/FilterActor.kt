@@ -4,7 +4,7 @@ import ru.dimagor555.mvicompose.abstraction.Actor
 import ru.dimagor555.parilka.android.featureBath.presentation.filter.FilterUseCases
 import ru.dimagor555.parilka.android.featureBath.presentation.filter.model.FilterStore.*
 import ru.dimagor555.parilka.android.featureBath.presentation.filter.model.FilterStore.Action.InitScreen
-import ru.dimagor555.parilka.bath.usecase.GetFiltersUseCase
+import ru.dimagor555.parilka.bath.usecase.GetBathFiltersUseCase
 
 class FilterActor(
     private val useCases: FilterUseCases,
@@ -12,6 +12,8 @@ class FilterActor(
     override suspend fun onAction(action: Action) {
         when (action) {
             is InitScreen -> getFilters()
+            is Action.MarkFilter -> markFilter(action.filter, action.isMarked)
+            is Action.SaveMarkedFilters -> saveMarkedFilters(action.markedFilters)
         }
     }
 
@@ -22,13 +24,21 @@ class FilterActor(
         sendMessage(Message.ShowFilters(filterNames))
     }
 
-    private fun getFilterName(key: GetFiltersUseCase.FilterType): String {
+    private fun getFilterName(key: GetBathFiltersUseCase.FilterType): String {
         return when (key) {
-            GetFiltersUseCase.FilterType.STEAM -> "Виды парной"
-            GetFiltersUseCase.FilterType.BATH -> "Банные услуги"
-            GetFiltersUseCase.FilterType.AQUA -> "Аквазона"
-            GetFiltersUseCase.FilterType.ADDITIONAL -> "Доп. Услуги"
-            GetFiltersUseCase.FilterType.FOOD -> "Кухня"
+            GetBathFiltersUseCase.FilterType.STEAM -> "Виды парной"
+            GetBathFiltersUseCase.FilterType.BATH -> "Банные услуги"
+            GetBathFiltersUseCase.FilterType.AQUA -> "Аквазона"
+            GetBathFiltersUseCase.FilterType.ADDITIONAL -> "Доп. Услуги"
+            GetBathFiltersUseCase.FilterType.FOOD -> "Кухня"
         }
+    }
+
+    private suspend fun markFilter(filter: String, marked: Boolean) {
+        sendMessage(Message.MarkFilter(filter, marked))
+    }
+
+    private fun saveMarkedFilters(markedFilters: Set<String>) {
+        useCases.saveFiltersUseCase(markedFilters)
     }
 }

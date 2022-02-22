@@ -21,7 +21,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FilterCard(header: String, text: String, icon: ImageVector, onClick: () -> Unit) {
+fun FilterCard(
+    header: String,
+    filters: Set<String>,
+    markedFilters: Set<String>,
+    icon: ImageVector,
+    onClick: (String, Boolean) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
     val rotate = animateFloatAsState(if (expanded) 180f else 0f)
     Card(
@@ -47,7 +53,7 @@ fun FilterCard(header: String, text: String, icon: ImageVector, onClick: () -> U
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     FilterIcon(icon)
-                    FilterTitle(header, text)
+                    FilterTitle(header, filters.toString().dropLast(1).drop(1))
                 }
                 FilterButton(rotate)
             }
@@ -57,8 +63,10 @@ fun FilterCard(header: String, text: String, icon: ImageVector, onClick: () -> U
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    SelectFilter("Бассейн", {})
-                    SelectFilter("Купель", {})
+                    filters.forEach {
+                        val isMarked = markedFilters.contains(it)
+                        SelectFilter(it, isMarked, onClick)
+                    }
                 }
             }
         }
@@ -117,7 +125,7 @@ fun FilterButton(rotate: State<Float>) {
 }
 
 @Composable
-fun SelectFilter(text: String, onClick: () -> Unit) {
+fun SelectFilter(text: String, isMarked: Boolean, onClick: (String, Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +139,7 @@ fun SelectFilter(text: String, onClick: () -> Unit) {
             Modifier
                 .weight(1f)
                 .padding(10.dp))
-        SelectButton(onClick, Modifier.weight(0.7f).height(45.dp))
+        SelectButton(Modifier.weight(0.7f).height(45.dp), text, isMarked, onClick)
     }
 }
 
@@ -145,19 +153,17 @@ fun SelectTitle(text: String, modifier: Modifier) {
 }
 
 @Composable
-fun SelectButton(onClick: () -> Unit, modifier: Modifier) {
-    var pressed by remember { mutableStateOf(false) }
-    val text = if (pressed) "Отменить" else "Выбрать"
+fun SelectButton(modifier: Modifier, filter: String, isMarked: Boolean, onClick: (String, Boolean) -> Unit, ) {
+    val text = if (isMarked) "Отменить" else "Выбрать"
     Button(
         modifier = modifier,
         onClick = {
-            pressed = !pressed
-            onClick()
+            onClick(filter, !isMarked)
         },
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor =
-            if (pressed)
+            if (isMarked)
                 MaterialTheme.colors.error.copy(red = 1f, green = 0.6f, blue = 0.6f)
             else
                 MaterialTheme.colors.surface,
