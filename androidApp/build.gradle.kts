@@ -1,3 +1,5 @@
+import ru.dimagor555.parilka.Deps
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -12,8 +14,8 @@ conventions {
 dependencies {
     implementation(projects.shared)
     implementation(projects.bathFeature.data)
-    implementation(projects.parilkaClient.bathFeature.usecase)
+    implementation(projects.bathFeature.usecase)
 
-    implementation(ru.dimagor555.parilka.Deps.MviCompose.core)
-    implementation(ru.dimagor555.parilka.Deps.MviCompose.android)
+    implementation(Deps.MviCompose.core)
+    implementation(Deps.MviCompose.android)
 }
