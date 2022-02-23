@@ -1,6 +1,7 @@
 package ru.dimagor555.parilka.android.featureBath.presentation.bath.model
 
 import ru.dimagor555.mvicompose.abstraction.Actor
+import ru.dimagor555.parilka.android.featureBath.presentation.bath.BathUseCases
 import ru.dimagor555.parilka.android.featureBath.presentation.bath.model.BathStore.*
 
 class BathActor(
