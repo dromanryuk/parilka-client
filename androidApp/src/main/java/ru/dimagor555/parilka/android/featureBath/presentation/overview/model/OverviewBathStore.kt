@@ -18,16 +18,18 @@ class OverviewBathStore(
     data class State(
         val bathStates: List<BathOfferState> = emptyList(),
         val cityId: Int = 0,
-        val cityName: String = ""
+        val cityName: String = "",
+        val markedFilters: Set<String> = emptySet()
     )
 
     sealed interface Action {
-         object InitScreen : Action
+        object InitScreen : Action
     }
 
     sealed interface Message {
         data class ShowBathStates(val bathStates: List<BathOfferState>) : Message
         data class SetNearestCity(val cityId: Int, val cityName: String) : Message
+        data class SetMarkedFilters(val filters: Set<String>) : Message
     }
 
     sealed interface SideEffect {

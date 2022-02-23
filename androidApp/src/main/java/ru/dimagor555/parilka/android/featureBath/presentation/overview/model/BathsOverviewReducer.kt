@@ -9,5 +9,6 @@ class BathsOverviewReducer : Reducer<State, Message> {
         when (msg) {
             is Message.ShowBathStates -> copy(bathStates = msg.bathStates)
             is Message.SetNearestCity -> copy(cityId = msg.cityId, cityName = msg.cityName)
+            is Message.SetMarkedFilters -> copy(markedFilters = msg.filters)
         }
 }

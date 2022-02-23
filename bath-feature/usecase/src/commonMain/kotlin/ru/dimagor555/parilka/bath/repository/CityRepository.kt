@@ -6,5 +6,7 @@ import ru.dimagor555.parilka.bath.domain.city.GeoCoordinate
 interface CityRepository {
     suspend fun getAll(): List<City>
 
+    suspend fun getCityById(id: Int): City?
+
     suspend fun findNearestByGeoCoordinate(geoCoordinate: GeoCoordinate): City
 }

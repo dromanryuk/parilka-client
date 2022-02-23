@@ -20,7 +20,7 @@ import ru.dimagor555.parilka.android.featureBath.presentation.overview.model.sta
 fun OverviewScreenContent(
     bathStates: List<BathOfferState>,
     onBathClick: () -> Unit,
-    onFilterClick: () -> Unit
+    onFilterClick: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier

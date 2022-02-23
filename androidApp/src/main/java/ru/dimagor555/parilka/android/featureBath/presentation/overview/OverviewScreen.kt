@@ -27,6 +27,12 @@ fun OverviewScreen(
                 onSettingsClick = {}
             )
         },
-        content = { OverviewScreenContent(state.bathStates, onBathClick, onFilterClick) }
+        content = {
+            OverviewScreenContent(
+                bathStates = state.bathStates,
+                onBathClick = onBathClick,
+                onFilterClick = onFilterClick,
+            )
+        }
     )
 }
