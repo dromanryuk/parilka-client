@@ -10,12 +10,18 @@ class WelcomeActor(
 ) : Actor<State, Action, Message, SideEffect>() {
     override suspend fun onAction(action: Action) {
         when (action) {
-             is InitScreen -> getNearestCity()
+            InitScreen -> getNearestCity()
+            Action.SetCitySettings -> setCitySettings()
         }
     }
 
     private suspend fun getNearestCity() {
-        val cityState = useCases.findNearestCityUseCase()
-        cityState?.let { sendMessage(Message.ShowNearestCity(cityState.name)) }
+        val cityState = useCases.findNearestCityUseCase() ?: return
+        sendMessage(Message.ShowNearestCity(cityState.name))
+    }
+
+    private suspend fun setCitySettings() {
+        val nearestCity = useCases.findNearestCityUseCase() ?: return
+        useCases.setCitySettingsUseCase(nearestCity.id)
     }
 }

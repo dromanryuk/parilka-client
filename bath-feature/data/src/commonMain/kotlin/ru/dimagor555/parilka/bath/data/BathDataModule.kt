@@ -7,14 +7,16 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import ru.dimagor555.parilka.bath.repository.BathOfferRepository
 import ru.dimagor555.parilka.bath.repository.CityRepository
+import ru.dimagor555.parilka.bath.repository.FilterRepository
 import ru.dimagor555.parilka.bath.repository.SettingsRepository
 
 val bathDataModule = module {
     single { createHttpClient() }
     single<ParilkaApi> { ParilkaApiImpl(get()) }
-    single<CityRepository> { NetworkCityRepository(get()) }
-    single<BathOfferRepository> { NetworkBathOfferRepository(get()) }
+    single<CityRepository> { MockCityRepository() }
+    single<BathOfferRepository> { MockBathOfferRepository() }
     single<SettingsRepository> { SettingsRepositoryImpl() }
+    single<FilterRepository> { FilterRepositoryImpl() }
     createGeoLocationRepository(this)
 }
 

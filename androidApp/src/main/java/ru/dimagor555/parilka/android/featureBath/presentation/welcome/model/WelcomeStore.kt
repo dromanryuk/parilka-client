@@ -14,10 +14,13 @@ class WelcomeStore(useCases: WelcomeUseCases) : Store<Action, State, SideEffect>
 ) {
     data class State(
         val cityState: String = "",
+        val navigateToOverviewScreen: Boolean = false,
+        val navigateToCityScreen: Boolean = false,
     )
 
     sealed interface Action {
         object InitScreen : Action
+        object SetCitySettings : Action
     }
 
     sealed interface Message {
